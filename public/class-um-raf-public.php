@@ -109,7 +109,7 @@ class Um_Raf_Public {
 	public function enqueue_scripts() {
 		wp_register_script( $this->plugin_name . '-google-recapthca-api-v2', 'https://www.google.com/recaptcha/api.js' ); // @codingStandardsIgnoreLine
 		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/um-raf-public.js', array( 'jquery' ), $this->version, false );
-		
+
 		// Add the ajax URL.
 		wp_localize_script(
 			$this->plugin_name,
@@ -217,7 +217,7 @@ class Um_Raf_Public {
 
 		um_fetch_user( $user->ID );
 
-		UM()->user()->email_pending();
+		UM()->common()->users()->send_activation( $user->ID, true );
 
 		Um_Raf_Ajax::return_success( apply_filters( 'um_raf_email_sent_message', __( 'Your activation email has been resent.', 'um_raf' ) ) );
 	}
